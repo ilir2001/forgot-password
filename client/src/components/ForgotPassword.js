@@ -4,11 +4,12 @@ import axios from 'axios';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleForgotPassword = async () => {
     try {
       await axios.post('http://localhost:5000/forgot-password', { email });
-      alert('Password reset email sent');
+      setEmailSent(true);
     } catch (error) {
       console.error(error.response.data.message);
       alert('Error sending reset email');
@@ -16,15 +17,33 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
-      <h2>Forgot Password</h2>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleForgotPassword}>Send Reset Email</button>
+    <div className="container mt-5">
+      <div className="card border-primary p-5">
+        <h2 className="text-center mb-4 text-primary">Forgot Password</h2>
+        {!emailSent ? (
+          <>
+            <p className="text-center text-muted">Enter your email to receive a password reset link.</p>
+            <div className="input-group mb-3">
+              <input
+                type="email"
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+              />
+              <div className="input-group-append">
+                <button onClick={handleForgotPassword} className="btn btn-primary">
+                  Send Reset Email
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <p className="text-center text-success">
+            Password reset email sent. Check your inbox for further instructions.
+          </p>
+        )}
+      </div>
     </div>
   );
 };
