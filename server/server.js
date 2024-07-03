@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // app.use(express.static(path.join(__dirname, "public")));
 // Serve static files from the client/build directory
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.use(express.static(path.join(__dirname, "../client", "build")));
 
 
 
@@ -125,7 +125,7 @@ app.use('/api/admins', adminRouter);
 // });
 
 app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
 });
 
 
