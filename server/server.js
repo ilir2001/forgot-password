@@ -21,16 +21,13 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static(path.join(__dirname, "public")));
-// Serve static files from the client/build directory
-app.use(express.static(path.join(__dirname, "../client", "build")));
-
+app.use(express.static(path.join(__dirname, "public")));
 
 
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://ilirmehmeti02:mFZoSVLwPnvcZ4KO@cluster0.faghw3f.mongodb.net/', {
+mongoose.connect('mongodb://localhost:27017/forgot', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -120,17 +117,12 @@ app.post('/forgot-password', async (req, res) => {
 app.use('/api/admins', adminRouter);
 
 
-// app.get("/*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
-
 app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 
-  
-const PORT = 3030;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
