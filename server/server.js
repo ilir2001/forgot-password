@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/forgot', {
+mongoose.connect('mongodb+srv://ilirmehmeti02:mFZoSVLwPnvcZ4KO@cluster0.faghw3f.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
